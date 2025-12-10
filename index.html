@@ -3,308 +3,255 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>IP Activity Scanner — Demo</title>
+  <title>IP Activity Scanner — Apple</title>
+
   <style>
-    :root{
-      --bg:#f4f6f8;
-      --panel:#ffffff;
-      --muted:#6b7280;
-      --accent:#0b5cff;
-      --term-bg:#0b0f14;
-      --term-fg:#cfe8ff;
-      --glass: rgba(255,255,255,0.6);
+    body {
+      margin: 0;
+      background: #eef2ff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+      display: flex;
+      justify-content: center;
+      padding: 30px;
     }
-    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
-    body{background:linear-gradient(180deg,#eef2ff 0%, #f3f7fb 100%);display:flex;align-items:center;justify-content:center;padding:28px;}
-    .card{width:920px;max-width:95%;background:var(--panel);border-radius:14px;box-shadow:0 12px 40px rgba(12,20,40,0.12);overflow:hidden}
-    .header{display:flex;align-items:center;gap:20px;padding:18px 22px;border-bottom:1px solid #eef1f6}
-    .title{font-weight:600;font-size:18px;color:#0f1724}
-    .subtitle{color:var(--muted);font-size:13px}
-    .controls{margin-left:auto;display:flex;gap:10px;align-items:center}
-    .input{
-      display:flex;gap:8px;align-items:center;background:#f7f9fc;padding:8px;border-radius:10px;border:1px solid #e7edf8;
+
+    .card {
+      width: 900px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      overflow: hidden;
     }
-    input[type="text"]{border:0;background:transparent;padding:8px 6px;font-size:14px;outline:none;width:220px}
-    button{
-      background:var(--accent);color:white;padding:9px 14px;border-radius:9px;border:0;font-weight:600;cursor:pointer;
-      box-shadow:0 6px 18px rgba(11,92,255,0.18);
+
+    .header {
+      padding: 18px 24px;
+      border-bottom: 1px solid #e5e8ef;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    button:disabled{opacity:0.6;cursor:default;box-shadow:none}
-    /* Terminal window */
-    .terminal-wrap{display:flex;flex-direction:column;background:linear-gradient(180deg, #eef3ff 0%, #ffffff 100%);padding:22px}
-    .terminal{
-      margin-top:12px;border-radius:12px;background:var(--term-bg);color:var(--term-fg);padding:14px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;min-height:320px;max-height:520px;overflow:auto;box-shadow:inset 0 -6px 30px rgba(0,0,0,0.45)
+
+    .title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #131a27;
     }
-    .traffic{display:flex;gap:8px;align-items:center}
-    .dot{width:12px;height:12px;border-radius:20px;box-shadow:inset 0 -1px rgba(0,0,0,0.15)}
-    .dot.red{background:#ff5f57}
-    .dot.yellow{background:#ffbd2e}
-    .dot.green{background:#28c840}
-    .terminal-header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-    .prompt{color:#9aaebf;font-size:13px;margin-bottom:8px}
-    .line{white-space:pre-wrap;line-height:1.5}
-    .progress-wrap{display:flex;align-items:center;gap:12px;margin-top:12px}
-    .progress-bar{flex:1;background:rgba(255,255,255,0.06);height:10px;border-radius:8px;overflow:hidden}
-    .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#36d1dc,#5b86e5)}
-    .report{margin-top:14px;background:#0f1724;color:#e6eefc;padding:14px;border-radius:10px}
-    table{width:100%;border-collapse:collapse;color:#e6eefc}
-    th,td{padding:8px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.06);font-size:14px}
-    .small{font-size:13px;color:rgba(206,232,255,0.85)}
-    .disclaimer{font-size:12px;color:var(--muted);padding:12px 22px;background:linear-gradient(180deg, rgba(11,92,255,0.04), transparent);border-top:1px solid #eef3ff}
-    .footer{padding:14px 22px;text-align:right;color:var(--muted);font-size:13px}
-    .chip{background:rgba(255,255,255,0.04);padding:6px 8px;border-radius:8px;font-weight:600;font-size:13px;color:#dbeafe}
-    @media (max-width:640px){
-      .controls{flex-direction:column;gap:8px}
-      input[type="text"]{width:140px}
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .input-box {
+      border: 1px solid #d0d7e5;
+      background: #f7f9fc;
+      padding: 9px 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-box span {
+      font-size: 13px;
+      font-weight: 600;
+      color: #475168;
+    }
+
+    input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 14px;
+      width: 190px;
+    }
+
+    button {
+      background: #0b5cff;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(11,92,255,0.25);
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    /* terminal */
+    .terminal-area {
+      padding: 24px;
+      background: #f4f7ff;
+    }
+
+    .terminal {
+      background: #0c1017;
+      color: #d8e6ff;
+      padding: 14px;
+      font-family: monospace;
+      border-radius: 12px;
+      min-height: 300px;
+      max-height: 480px;
+      overflow-y: auto;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+
+    .progress {
+      margin-top: 14px;
+      height: 10px;
+      width: 100%;
+      background: #dce3f5;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0%;
+      background: #4e8cff;
+    }
+
+    .timer {
+      text-align: right;
+      margin-top: 6px;
+      font-weight: 600;
+      color: #3c4761;
+      font-size: 14px;
+    }
+
+    .report {
+      background: #0d1523;
+      padding: 16px;
+      border-radius: 12px;
+      color: #eef7ff;
+      margin-top: 16px;
+      display: none;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 14px;
+      border-collapse: collapse;
+      color: #cfe6ff;
+    }
+
+    td, th {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 0;
     }
   </style>
 </head>
+
 <body>
-  <div class="card" role="region" aria-label="IP Activity Scanner demo">
-    <div class="header">
-      <div>
-        <div class="title">IP Activity Scanner — Demo</div>
-        <div class="subtitle">Simulated macOS-style network activity analysis (demo only)</div>
+
+<div class="card">
+
+  <div class="header">
+    <div class="title">IP Activity Scanner — Apple</div>
+
+    <div class="controls">
+
+      <div class="input-box">
+        <span>IP:</span>
+        <input id="ip" placeholder="Enter IP address">
       </div>
 
-      <div class="controls">
-        <div class="input" title="Enter IP address">
-          <label class="small" for="ip">IP</label>
-          <input id="ip" type="text" placeholder="e.g., 203.0.113.42" aria-label="IP address input" />
-        </div>
-        <button id="runBtn">Run Scan</button>
-      </div>
+      <button id="run">Run Scan</button>
     </div>
-
-    <div class="terminal-wrap">
-      <div class="terminal-header">
-        <div class="traffic" aria-hidden="true">
-          <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
-        </div>
-        <div style="margin-left:12px;">
-          <div style="font-weight:600;color:var(--term-fg)">Terminal • macOS</div>
-          <div class="prompt">Demo: This interface simulates a 2-minute scan and report. No network actions are performed.</div>
-        </div>
-        <div style="margin-left:auto" id="statusChip"></div>
-      </div>
-
-      <div id="terminal" class="terminal" role="log" aria-live="polite">
-        <div class="line small">Welcome to IP Activity Scanner — demo console.</div>
-        <div class="line small">Enter an IP and click <strong>Run Scan</strong> to begin.</div>
-      </div>
-
-      <div class="progress-wrap">
-        <div class="progress-bar" aria-hidden="true"><div id="progress" class="progress-fill"></div></div>
-        <div class="chip" id="timer">00:00</div>
-      </div>
-
-      <div id="reportArea" class="report" style="display:none"></div>
-    </div>
-
-    <div class="disclaimer">
-      <strong>Disclaimer:</strong> This page is for demonstration purposes only. It simulates a security scan and report for presentation / UI prototyping. It does not perform any network scanning, data collection, or contact external servers.
-    </div>
-
-    <div class="footer">Designed to look professional & authentic • Demo output is fictional</div>
   </div>
 
-  <script>
-    // Helper: simple typing effect
-    function typeLine(container, text, delayPerChar = 10) {
-      return new Promise(resolve => {
-        const span = document.createElement('div');
-        span.className = 'line';
-        container.appendChild(span);
-        let i = 0;
-        const step = () => {
-          if (i <= text.length) {
-            span.textContent = text.slice(0, i);
-            container.scrollTop = container.scrollHeight;
-            i++;
-            setTimeout(step, delayPerChar);
-          } else {
-            resolve();
-          }
-        };
-        step();
-      });
+  <div class="terminal-area">
+    <div id="terminal" class="terminal">
+Welcome to IP Activity Scanner — Apple inc.
+
+    </div>
+
+    <div class="progress">
+      <div id="fill" class="fill"></div>
+    </div>
+
+    <div id="time" class="timer">02:00</div>
+
+    <div id="report" class="report"></div>
+  </div>
+
+</div>
+
+<script>
+function typeLine(text) {
+  const term = document.getElementById("terminal");
+  term.innerHTML += "\n" + text;
+  term.scrollTop = term.scrollHeight;
+}
+
+function pad(v) { return v < 10 ? "0" + v : v; }
+
+document.getElementById("run").onclick = function() {
+  let ip = document.getElementById("ip").value.trim();
+  if (!ip) {
+    document.getElementById("terminal").innerHTML += "\nError: Enter a valid IP.";
+    return;
+  }
+
+  // reset
+  document.getElementById("terminal").innerHTML = "Starting scan for " + ip + "...";
+  document.getElementById("report").style.display = "none";
+  document.getElementById("fill").style.width = "0%";
+
+  let sec = 120;
+  let timer = setInterval(() => {
+    sec--;
+    let m = Math.floor(sec / 60);
+    let s = sec % 60;
+    document.getElementById("time").innerHTML = pad(m) + ":" + pad(s);
+
+    let pct = ((120 - sec) / 120) * 100;
+    document.getElementById("fill").style.width = pct + "%";
+
+    if (sec % 8 === 0) {
+      typeLine("Scanning logs...");
     }
 
-    // Small utility for time format
-    function pad(n){return n<10?'0'+n:n}
-
-    const runBtn = document.getElementById('runBtn');
-    const ipInput = document.getElementById('ip');
-    const terminal = document.getElementById('terminal');
-    const progress = document.getElementById('progress');
-    const timerChip = document.getElementById('timer');
-    const reportArea = document.getElementById('reportArea');
-    const statusChip = document.getElementById('statusChip');
-
-    let scanTimer = null;
-
-    // Validate IPv4 (basic)
-    function validIP(ip){
-      if(!ip) return false;
-      const parts = ip.trim().split('.');
-      if(parts.length!==4) return false;
-      return parts.every(p=>{
-        if(p==='') return false;
-        if(!/^\d+$/.test(p)) return false;
-        const n = Number(p);
-        return n>=0 && n<=255;
-      });
+    if (sec <= 0) {
+      clearInterval(timer);
+      finish(ip);
     }
+  }, 1000);
+};
 
-    function randomInt(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+function finish(ip) {
+  typeLine("Finalizing report...");
+  let rep = document.getElementById("report");
+  rep.style.display = "block";
 
-    runBtn.addEventListener('click', async () => {
-      const ip = ipInput.value.trim();
-      if(!validIP(ip)){
-        terminal.innerHTML = '';
-        await typeLine(terminal, 'Error: Please enter a valid IPv4 address (e.g., 203.0.113.42).');
-        return;
-      }
+  rep.innerHTML = `
+    <h3 style="margin-top:0;">Final Report</h3>
+    <div>IP Address: <strong>${ip}</strong></div>
+    <div>Observation Window: Last 8 hours</div>
 
-      // Reset UI
-      runBtn.disabled = true;
-      ipInput.disabled = true;
-      reportArea.style.display = 'none';
-      reportArea.innerHTML = '';
-      progress.style.width = '0%';
-      timerChip.textContent = '02:00';
-      terminal.innerHTML = '';
-      statusChip.innerHTML = '<span class="chip">RUNNING</span>';
+    <table>
+      <tr><th>Country</th><th>Login Attempts</th></tr>
+      <tr><td>China</td><td>1</td></tr>
+      <tr><td>Canada</td><td>2</td></tr>
+      <tr><td>United States</td><td>4</td></tr>
+      <tr><td>Russia</td><td>3</td></tr>
+      <tr><td>Ireland</td><td>5</td></tr>
+    </table>
 
-      // Sequence of fake / plausible steps with typing
-      const steps = [
-        `Initializing scanner for ${ip} ...`,
-        'Loading signature database (local) ...',
-        'Checking last-known activity logs ...',
-        'Querying passive feeds (local cache) ...',
-        'Analyzing authentication logs (simulated) ...',
-        'Tracing origin and geo-lookup (simulated) ...',
-        'Compiling anomaly score ...'
-      ];
+    <p style="margin-top:10px;color:#cfe6ff;">
+      Total activity detected from 5 different countries within the last 8 hours.
+    </p>
+  `;
 
-      // Start 120-second simulated scan with progressive typing and progress bar
-      const totalMs = 120000; // 2 minutes
-      const updateInterval = 1000; // every 1s
-      let elapsed = 0;
+  typeLine("Scan complete.");
+}
+</script>
 
-      // schedule typing of the above steps spaced through the 120s
-      const spacing = Math.max(8, Math.floor(totalMs / (steps.length * 1000))); // seconds between steps
-      let stepIndex = 0;
-
-      // type first immediate lines quickly
-      for (let i = 0; i < Math.min(2, steps.length); i++){
-        await typeLine(terminal, `[${new Date().toLocaleTimeString()}] ${steps[i]}`, 8);
-        stepIndex++;
-      }
-
-      // Start progress interval
-      scanTimer = setInterval(() => {
-        elapsed += updateInterval;
-        const pct = Math.min(100, (elapsed/totalMs)*100);
-        progress.style.width = pct + '%';
-        const remaining = Math.max(0, totalMs - elapsed);
-        const min = Math.floor(remaining/60000);
-        const sec = Math.floor((remaining%60000)/1000);
-        timerChip.textContent = pad(min) + ':' + pad(sec);
-
-        // occasionally write a step
-        const approxPhase = Math.floor((elapsed/totalMs) * steps.length);
-        if(approxPhase >= stepIndex && stepIndex < steps.length){
-          typeLine(terminal, `[${new Date().toLocaleTimeString()}] ${steps[stepIndex]}`, 8);
-          stepIndex++;
-        }
-
-        // add random log noise lines
-        if(Math.random() < 0.35){
-          const noise = [
-            'Checking /var/log/auth.log (simulated)',
-            'Analyzing unusual auth patterns...',
-            'Correlating with threat intel tags...',
-            'Scanning for recent brute-force signatures...'
-          ];
-          typeLine(terminal, `[${new Date().toLocaleTimeString()}] ${noise[randomInt(0,noise.length-1)]}`, 5);
-        }
-
-        if(elapsed >= totalMs){
-          clearInterval(scanTimer);
-          progress.style.width = '100%';
-          timerChip.textContent = '00:00';
-          statusChip.innerHTML = '<div style="padding:6px 10px;border-radius:8px;background:#0ea5a1;color:white;font-weight:700">COMPLETE</div>';
-          finishScan(ip);
-        }
-      }, updateInterval);
-    });
-
-    // Build final report
-    async function finishScan(ip){
-      await typeLine(terminal, `[${new Date().toLocaleTimeString()}] Finalizing results...`, 8);
-      await typeLine(terminal, `[${new Date().toLocaleTimeString()}] Generating report for ${ip}`, 8);
-
-      // Create fictional but plausible per-country details (you asked these five countries)
-      const countries = [
-        {name:'China', code:'CN'},
-        {name:'Canada', code:'CA'},
-        {name:'United States', code:'US'},
-        {name:'Russia', code:'RU'},
-        {name:'Ireland', code:'IE'}
-      ];
-
-      // Generate random counts and timestamps within last 8 hours
-      const now = Date.now();
-      const eightH = 8 * 60 * 60 * 1000;
-      countries.forEach(c=>{
-        c.attempts = randomInt(1, 14);
-        // for last attempt timestamp within last 8 hours
-        const t = new Date(now - randomInt(0, eightH));
-        c.last = t.toLocaleString();
-      });
-
-      // Sort by attempts desc
-      countries.sort((a,b)=>b.attempts - a.attempts);
-
-      // Compose report HTML
-      let html = `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
-        <div>
-          <div style="font-weight:700;font-size:15px;margin-bottom:6px">Simulated Final Report</div>
-          <div class="small">Target IP: <strong>${ip}</strong> &nbsp;•&nbsp; Generated: ${new Date().toLocaleString()}</div>
-          <div class="small" style="margin-top:4px">Observation window: last 8 hours (simulated)</div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-weight:700;color:#c7f9ff">Risk Summary</div>
-          <div class="small" style="margin-top:6px">Multiple remote login attempts detected from 5 distinct countries</div>
-        </div>
-      </div>
-      <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:12px 0">`;
-
-      html += `<table aria-label="report-table"><thead><tr><th>Country</th><th>Last Attempt</th><th>Attempts</th></tr></thead><tbody>`;
-      countries.forEach(c=>{
-        html += `<tr><td>${c.name}</td><td>${c.last}</td><td>${c.attempts}</td></tr>`;
-      });
-      html += `</tbody></table>`;
-
-      html += `<div style="margin-top:12px;font-size:13px;color:rgba(255,255,255,0.9)">
-        <strong>Conclusion:</strong> In the last 8 hours there were login attempts originating from the five countries listed above (China, Canada, United States, Russia, Ireland). This report is a simulated demonstration and should not be used for operational decisions.
-      </div>`;
-
-      reportArea.innerHTML = html;
-      reportArea.style.display = 'block';
-
-      // Also append textual summary to terminal
-      await typeLine(terminal, `[${new Date().toLocaleTimeString()}] Report: Login attempts recorded from the following countries: ${countries.map(c=>c.name).join(', ')}.`, 6);
-      await typeLine(terminal, `[${new Date().toLocaleTimeString()}] Scan complete. (Demo output — not operational data)`, 6);
-
-      // Re-enable controls
-      runBtn.disabled = false;
-      ipInput.disabled = false;
-    }
-
-    // Accessibility: allow Enter to run
-    ipInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') runBtn.click(); });
-  </script>
 </body>
 </html>
